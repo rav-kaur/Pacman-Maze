@@ -3,19 +3,41 @@
  * Student ID: 181741000
  */
 
+import java.util.ArrayList;
+
 public class Maze 
 {	
-	private Node[][] mazeMap;
+	ArrayList<ArrayList<Node>> maze = new ArrayList<ArrayList<Node>>();
 	
-	public Maze(int x, int y) 
+	public void PushArrayNode(ArrayList<Node> nodeLine) 
 	{
-		mazeMap = new Node[x][y];
+		maze.add(nodeLine);
+		
 	}
 	
-	public void SetNode(int x, int y, Node n) 
+	public Node GetNodeAt(int x, int y)
 	{
-		mazeMap[x][y] = n;
+		return maze.get(y).get(x);
 	}
 	
+	public void SetNodeVisited(int x, int y)
+	{
+		maze.get(y).get(x).SetVisited(true);;
+	}
+	
+	public void PrintMaze()
+	{
+		for(int y = 0; y < maze.size(); y++) 
+		{
+			System.out.println(maze.get(y).size());
+			
+			for(int x = 0; x < maze.get(y).size(); x++) 
+			{
+				System.out.print(maze.get(y).get(x).GetNodeTypeName());
+			}
+			System.out.println("");
+			
+		}
+	}
 	
 }

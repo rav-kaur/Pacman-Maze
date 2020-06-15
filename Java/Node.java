@@ -10,6 +10,17 @@ public class Node
 	private boolean visited = false;
 	private NodeType typeOfNode;
 
+	
+	public Node()
+	{
+		
+	}
+	
+	public Node(NodeType t)
+	{
+		typeOfNode = t;
+		visited = false;
+	}
 		
 	public void SetNode(NodeType nt) 
 	{
@@ -20,6 +31,29 @@ public class Node
 		return typeOfNode;
 	}
 	
+	public String GetNodeTypeName()
+	{
+		if(typeOfNode == NodeType.space)
+		{
+			return " ";	
+		}
+		if(typeOfNode == NodeType.wall)
+		{
+			return "X";
+		}
+		if(typeOfNode == NodeType.end)
+		{
+			return "E";
+		}
+		if(typeOfNode == NodeType.start)
+		{
+			return "S";
+		}
+		
+		return "ERROR";
+		
+	}
+	
 	public boolean IsVisited() 
 	{
 		return visited;
@@ -28,6 +62,8 @@ public class Node
 	{
 		visited = b;
 	}
+	
+	
 	
 	
 	
