@@ -12,7 +12,6 @@ public class Maze
 	public void PushArrayNode(ArrayList<Node> nodeLine) 
 	{
 		maze.add(nodeLine);
-		
 	}
 	
 	public Node GetNodeAt(int x, int y)
@@ -29,13 +28,13 @@ public class Maze
 	{
 		for(int y = 0; y < maze.size(); y++) 
 		{
-			System.out.println(maze.get(y).size());
+			System.out.println("");
 			
 			for(int x = 0; x < maze.get(y).size(); x++) 
 			{
 				System.out.print(maze.get(y).get(x).GetNodeTypeName());
 			}
-			System.out.println("");
+			
 			
 		}
 	}

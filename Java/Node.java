@@ -9,12 +9,6 @@ public class Node
 
 	private boolean visited = false;
 	private NodeType typeOfNode;
-
-	
-	public Node()
-	{
-		
-	}
 	
 	public Node(NodeType t)
 	{

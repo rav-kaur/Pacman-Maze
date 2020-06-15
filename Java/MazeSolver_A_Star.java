@@ -16,36 +16,37 @@ public class MazeSolver_A_Star
 		Scanner sc = new Scanner(System.in);
 		sc.useDelimiter("");
 		
+		
+		
+		
+		
 		ArrayList<Node> nL = new ArrayList<Node>();
-		
-		
-		
-		
 		while(sc.hasNext()) 
 		{
+			
 			
 			String next = sc.next();
 			
 			if(next.equals("\n"))
 			{
 				m.PushArrayNode(nL);
-				nL.clear();
+				nL = new ArrayList<Node>();
 			}
 			else 
 			{
 				if(next.equals(" ")) 
 				{
 					nL.add(new Node(Node.NodeType.space));
-				}
-				if(next.equals("%")) 
+				} 
+				else if(next.equals("%")) 
 				{
 					nL.add(new Node(Node.NodeType.wall));
 				}
-				if(next.equals("P")) 
+				else if(next.equals("P")) 
 				{
 					nL.add(new Node(Node.NodeType.start));
 				}
-				if(next.equals(".")) 
+				else if(next.equals(".")) 
 				{
 					nL.add(new Node(Node.NodeType.end));
 				}

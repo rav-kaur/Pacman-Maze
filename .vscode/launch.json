@@ -1,0 +1,28 @@
+{
+    // Use IntelliSense to learn about possible attributes.
+    // Hover to view descriptions of existing attributes.
+    // For more information, visit: https://go.microsoft.com/fwlink/?linkid=830387
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "type": "java",
+            "name": "Debug (Launch) - Current File",
+            "request": "launch",
+            "mainClass": "${file}"
+        },
+        {
+            "type": "java",
+            "name": "Debug (Launch)-MazeSolver<PacmanMaze_622bb5d8>",
+            "request": "launch",
+            "mainClass": "MazeSolver",
+            "projectName": "PacmanMaze_622bb5d8"
+        },
+        {
+            "type": "java",
+            "name": "Debug (Launch)-MazeSolver_A_Star<PacmanMaze_622bb5d8>",
+            "request": "launch",
+            "mainClass": "MazeSolver_A_Star",
+            "projectName": "PacmanMaze_622bb5d8"
+        }
+    ]
+}
