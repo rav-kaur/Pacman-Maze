@@ -16,10 +16,7 @@ public class MazeSolver_A_Star
 		Scanner sc = new Scanner(System.in);
 		sc.useDelimiter("");
 		
-		
-		
-		
-		
+
 		ArrayList<Node> nL = new ArrayList<Node>();
 		while(sc.hasNext()) 
 		{
