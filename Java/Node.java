@@ -10,22 +10,22 @@ public class Node
 	private boolean visited = false;
 	private NodeType typeOfNode;
 
+	private int row;
+	private int col;
 	
-	public Node()
-	{
-		
-	}
-	
-	public Node(NodeType t)
+	public Node(NodeType t, int x, int y)
 	{
 		typeOfNode = t;
 		visited = false;
+		row = y;
+		col = x;
 	}
 		
 	public void SetNode(NodeType nt) 
 	{
 		typeOfNode = nt;
 	}
+	
 	public NodeType GetNodeType()
 	{
 		return typeOfNode;
@@ -39,15 +39,15 @@ public class Node
 		}
 		if(typeOfNode == NodeType.wall)
 		{
-			return "X";
+			return "%";
 		}
 		if(typeOfNode == NodeType.end)
 		{
-			return "E";
+			return ".";
 		}
 		if(typeOfNode == NodeType.start)
 		{
-			return "S";
+			return "P";
 		}
 		
 		return "ERROR";
@@ -58,6 +58,12 @@ public class Node
 	{
 		return visited;
 	}
+
+	public boolean IsWall()
+	{
+		return typeOfNode == NodeType.wall;
+	}
+
 	public void SetVisited(boolean b)
 	{
 		visited = b;

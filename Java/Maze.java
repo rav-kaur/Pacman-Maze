@@ -7,12 +7,12 @@ import java.util.ArrayList;
 
 public class Maze 
 {	
+
 	ArrayList<ArrayList<Node>> maze = new ArrayList<ArrayList<Node>>();
 	
 	public void PushArrayNode(ArrayList<Node> nodeLine) 
 	{
 		maze.add(nodeLine);
-		
 	}
 	
 	public Node GetNodeAt(int x, int y)
@@ -22,21 +22,45 @@ public class Maze
 	
 	public void SetNodeVisited(int x, int y)
 	{
-		maze.get(y).get(x).SetVisited(true);;
+		maze.get(y).get(x).SetVisited(true);
 	}
-	
+
+	public ArrayList<Node> getNeighbours(Node currentNode, int x, int y){
+		
+		Node top, bottom, left, right;
+
+		ArrayList <Node> neighbours = new ArrayList<Node>();
+
+		if ((y-1) >= 0){
+			top = maze.get(y-1).get(x);
+			neighbours.add(top);
+		}
+		if ((y+1) < maze.size()){
+			bottom = maze.get(y+1).get(x);
+			neighbours.add(bottom);
+		}
+		if ((x-1) >= 0){
+			left = maze.get(y).get(x-1);
+			neighbours.add(left);
+		}
+		if ((x+1) < maze.get(0).size()){
+			right = maze.get(y).get(x+1);
+			neighbours.add(right);
+		}
+		return neighbours;
+	}
+
 	public void PrintMaze()
 	{
 		for(int y = 0; y < maze.size(); y++) 
 		{
-			System.out.println(maze.get(y).size());
+			System.out.println("");
 			
 			for(int x = 0; x < maze.get(y).size(); x++) 
 			{
 				System.out.print(maze.get(y).get(x).GetNodeTypeName());
 			}
-			System.out.println("");
-			
+				
 		}
 	}
 	
