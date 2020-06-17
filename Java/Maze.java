@@ -52,18 +52,22 @@ public class Maze
 		if ((y-1) >= 0){
 			top = maze.get(y-1).get(x);
 			neighbours.add(top);
+			top.setParent(currentNode);
 		}
 		if ((y+1) < maze.size()){
 			bottom = maze.get(y+1).get(x);
 			neighbours.add(bottom);
+			bottom.setParent(currentNode);
 		}
 		if ((x-1) >= 0){
 			left = maze.get(y).get(x-1);
 			neighbours.add(left);
+			left.setParent(currentNode);
 		}
 		if ((x+1) < maze.get(0).size()){
 			right = maze.get(y).get(x+1);
 			neighbours.add(right);
+			right.setParent(currentNode);
 		}
 		return neighbours;
 	}

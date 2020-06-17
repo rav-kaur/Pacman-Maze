@@ -12,6 +12,7 @@ public class Node
 
 	private int row;
 	private int col;
+	private Node parent;
 	
 	public Node(NodeType t, int x, int y)
 	{
@@ -19,6 +20,24 @@ public class Node
 		visited = false;
 		this.row = y;
 		this.col = x;
+		this.parent = null;
+	}
+
+	public Node(NodeType t, int x, int y, Node parent)
+	{
+		typeOfNode = t;
+		visited = false;
+		this.row = y;
+		this.col = x;
+		this.parent = parent;
+	}
+
+	public void setParent(Node parent){
+		this.parent = parent;
+	}
+
+	public Node getParent(){
+		return this.parent;
 	}
 
 	public int getRow(){
