@@ -1,30 +1,47 @@
-import java.util.Scanner;
 import java.util.ArrayList;
 import java.io.*;
 
 
 
 public class MazeParser {
-    public static void main(String[]args){
-        Maze m = new Maze();
-        Scanner sc = new Scanner(System.in);
-        
-        String fileName;
 
-        System.out.print("Input File Name: ");
-        fileName = sc.nextLine().trim();
-        File file = new File(fileName);
+    File file;
+    public MazeParser(){}
+
+    public MazeParser(File file){
+        this.file = file;
+    }
+
+    public void readFile (Maze m) throws Exception {
 
         BufferedReader br = new BufferedReader(new FileReader(file));
-        ArrayList<Node> nL = new ArrayList<Node>();
+        ArrayList<Node> nL;
 
-        char line;
+        String line;
+        int y = 0;
 
-        while((line = br.read()) != -1){
-            char c = line;
-            
+        while((line = br.readLine()) != null){
+            y++;
+            nL = new ArrayList<Node>();
+
+            for (int i = 0; i< line.length(); i++){
+                if (line.charAt(i) == ' '){
+                    nL.add(new Node (Node.NodeType.space, i, y));
+
+                } else if (line.charAt(i)== '%'){
+                    nL.add(new Node (Node.NodeType.wall, i, y));
+
+                } else if (line.charAt(i)== 'P'){
+                    nL.add(new Node (Node.NodeType.start, i, y));
+
+                } else if (line.charAt(i)== '.'){
+                    nL.add(new Node (Node.NodeType.end, i, y));
+
+                }
+            }
+            m.PushArrayNode(nL);
         }
-
+        br.close();
 
 
     }
