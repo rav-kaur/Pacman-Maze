@@ -32,11 +32,13 @@ public class MazeParser {
                     nL.add(new Node (Node.NodeType.wall, i, y));
 
                 } else if (line.charAt(i)== 'P'){
-                    nL.add(new Node (Node.NodeType.start, i, y));
-
+                    Node start = new Node (Node.NodeType.start, i, y);
+                    nL.add(start);
+                    m.SetStart(start);
                 } else if (line.charAt(i)== '.'){
-                    nL.add(new Node (Node.NodeType.end, i, y));
-
+                    Node end = new Node (Node.NodeType.end, i, y);
+                    nL.add(end);
+                    m.SetEnd(end);
                 }
             }
             m.PushArrayNode(nL);
