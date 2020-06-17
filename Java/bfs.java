@@ -6,7 +6,6 @@ public class bfs {
 
     public static void main(String[]args) throws Exception {
         Maze m = new Maze();
-        System.out.println(System.getProperty("user.dir"));
         Scanner sc = new Scanner(System.in);
         
         String fileName;
@@ -24,6 +23,14 @@ public class bfs {
         m.PrintMaze();
 
 
+
     }
+
+    void SolveMaze_BFS(Maze m)
+	{
+		
+	}
+
+    
     
 }
