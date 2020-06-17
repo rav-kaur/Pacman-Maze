@@ -28,7 +28,7 @@ public class bfs {
 
     void SolveMaze_BFS(Maze m)
 	{
-		
+        
 	}
 
     

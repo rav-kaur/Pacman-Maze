@@ -9,6 +9,8 @@ public class Maze
 {	
 
 	ArrayList<ArrayList<Node>> maze = new ArrayList<ArrayList<Node>>();
+	private Node start;
+	private Node end;
 	
 	public void PushArrayNode(ArrayList<Node> nodeLine) 
 	{
@@ -23,6 +25,22 @@ public class Maze
 	public void SetNodeVisited(int x, int y)
 	{
 		maze.get(y).get(x).SetVisited(true);
+	}
+
+	public void SetStart(Node start){
+		this.start = start;
+	}
+
+	public Node GetStart(){
+		return this.start;
+	}
+
+	public void SetEnd(Node end){
+		this.end = end;
+	}
+
+	public Node GetEnd(){
+		return this.end;
 	}
 
 	public ArrayList<Node> getNeighbours(Node currentNode, int x, int y){
