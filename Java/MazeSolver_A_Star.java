@@ -31,6 +31,7 @@ public class MazeSolver_A_Star
 			}
 			else 
 			{
+				/*
 				if(next.equals(" ")) 
 				{
 					nL.add(new Node(Node.NodeType.space));
@@ -46,7 +47,7 @@ public class MazeSolver_A_Star
 				else if(next.equals(".")) 
 				{
 					nL.add(new Node(Node.NodeType.end));
-				}
+				}*/
 				
 			}
 			

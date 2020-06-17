@@ -17,8 +17,16 @@ public class Node
 	{
 		typeOfNode = t;
 		visited = false;
-		row = y;
-		col = x;
+		this.row = y;
+		this.col = x;
+	}
+
+	public int getRow(){
+		return this.row;
+	}
+
+	public int getCol(){
+		return this.col;
 	}
 		
 	public void SetNode(NodeType nt) 
