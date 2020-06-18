@@ -43,6 +43,18 @@ public class Maze
 		return this.end;
 	}
 
+	public int getHeight(){
+		return maze.size();
+	}
+
+	public int getWidth(){
+		return maze.get(0).size();
+	}
+
+	public void setPath(Node current){
+		current.SetNode(Node.NodeType.path);
+	}
+
 	public ArrayList<Node> getNeighbours(Node currentNode, int x, int y){
 		
 		Node top, bottom, left, right;
@@ -82,8 +94,10 @@ public class Maze
 			{
 				System.out.print(maze.get(y).get(x).GetNodeTypeName());
 			}
+			
 				
 		}
+		System.out.println("");
 	}
 	
 }

@@ -1,10 +1,18 @@
 import java.util.Scanner;
+import java.util.Set;
 import java.io.*;
 import java.util.ArrayList;
-import java.util.Arrays;
+import java.util.HashSet;
 import java.util.LinkedList;
+import java.util.Queue;
+
+import java.util.*;
+
+
 
 public class bfs {
+
+    
 
     public static void main(String[]args) throws Exception {
         Maze m = new Maze();
@@ -21,62 +29,68 @@ public class bfs {
         parser.readFile(m);
 
         sc.close();
-
-        m.PrintMaze();
-
-
-        ArrayList<Node> path = SolveMaze_BFS(m);
-        Arrays.toString(path.toArray());
-
+        SolveMaze_BFS(m);
     }
 
-    public static ArrayList<Node> SolveMaze_BFS(Maze m)
+    public static boolean SolveMaze_BFS(Maze m)
 	{
+        Hashtable <Node, Node> path = new Hashtable <Node, Node>();
         Node start = m.GetStart();
-        Node end = m.GetEnd();
-        LinkedList<Node> nextToVisit = new LinkedList<>();
+        //Node end = m.GetEnd();
 
-        nextToVisit.add(start);
+        System.out.println("Start:" + start.getRow() +"," + start.getCol());
 
-        while (!nextToVisit.isEmpty()){
-            Node current = nextToVisit.remove();
+        Queue<Node> frontier = new LinkedList<>();
+        Set<Node> explored = new HashSet<Node>();
 
-            if (current.IsVisited()){
-                continue;
+        frontier.add(start);
+        while(!frontier.isEmpty()) {
+            Node current = frontier.remove();
+
+            if (!current.IsVisited()){
+
+                System.out.println("Node: " + current.GetNodeTypeName() + " ("+current.getRow() + "," +current.getCol()+")");
+                
+                if (current.GetNodeType() == Node.NodeType.end){
+                    rebuildPath(current, path);
+                    return true;
+                } else {
+                    ArrayList<Node> neighbors = m.getNeighbours(current, current.getCol(), current.getRow());
+                    for (Node neighbor : neighbors){
+                        if (!explored.contains(neighbor) && !neighbor.IsVisited()){
+                            //System.out.println("neighbor");
+                            frontier.add(neighbor);
+                            path.put(neighbor, current);
+                        }
+                    }
+                    current.SetVisited(true);
+                    explored.add(current);
+                } 
+                //i++;
             }
-
-            if (current.IsWall()){
-                current.SetVisited(true);
-                continue;
-            }
-
-            if (current == end){
-                return pathFinder(current);
-            }
-
-            ArrayList<Node> neighbours = m.getNeighbours(current, current.getCol(), current.getRow());
-            for (Node neighbour : neighbours){
-                nextToVisit.add(neighbour);
-                neighbour.SetVisited(true);
-            }
+            
+            
         }
-
-        return null;
-        
-
-    }
-    
-    public static ArrayList<Node> pathFinder(Node currentNode){
-        ArrayList<Node> path = new ArrayList<Node>();
-        Node iter = currentNode;
-
-        while (iter != null) {
-            path.add(iter);
-            iter = iter.getParent();
-        }
-        return path;
+        return false;
     }
 
-    
-    
+    public static void rebuildPath(Node current, Hashtable<Node, Node> path){
+        LinkedList<Node> finalPath = new LinkedList<>();
+
+        Node parent = path.get(current);
+        finalPath.push(current);
+        System.out.println(current.GetNodeTypeName());
+
+        while (parent != null){
+            finalPath.push(parent);
+            System.out.println(parent.GetNodeTypeName());
+            parent = path.get(parent);
+        }
+
+        System.out.println(finalPath.size());
+
+
+    }
+
+
 }

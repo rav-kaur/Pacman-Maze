@@ -21,7 +21,7 @@ public class MazeParser {
         int y = 0;
 
         while((line = br.readLine()) != null){
-            y++;
+            
             nL = new ArrayList<Node>();
             
 
@@ -29,24 +29,27 @@ public class MazeParser {
                 if (line.charAt(i) == ' '){
                     Node current = new Node (Node.NodeType.space, i, y);
                     nL.add(current);
-
-
+                    current.SetVisited(false);
                 } else if (line.charAt(i)== '%'){
                     Node current = new Node (Node.NodeType.wall, i, y);
                     nL.add(current);
+                    current.SetVisited(false);
                 } else if (line.charAt(i)== 'P'){
                     Node current = new Node (Node.NodeType.start, i, y);
                     nL.add(current);
-
+                    m.SetStart(current);
+                    current.SetVisited(false);
                 } else if (line.charAt(i)== '.'){
-                    Node current = new Node (Node.NodeType.space, i, y);
+                    Node current = new Node (Node.NodeType.end, i, y);
                     nL.add(current);
-
+                    m.SetEnd(current);
+                    current.SetVisited(false);
                 }
     
 
             }
             m.PushArrayNode(nL);
+            y++;
         }
         br.close();
 
