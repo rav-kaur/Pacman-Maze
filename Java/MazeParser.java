@@ -21,17 +21,21 @@ public class MazeParser {
         int y = 0;
 
         while((line = br.readLine()) != null){
-            y++;
+            
             nL = new ArrayList<Node>();
+            
 
             for (int i = 0; i< line.length(); i++){
                 if (line.charAt(i) == ' '){
-                    nL.add(new Node (Node.NodeType.space, i, y));
-
+                    Node current = new Node (Node.NodeType.space, i, y);
+                    nL.add(current);
+                    current.SetVisited(false);
                 } else if (line.charAt(i)== '%'){
-                    nL.add(new Node (Node.NodeType.wall, i, y));
-
+                    Node current = new Node (Node.NodeType.wall, i, y);
+                    nL.add(current);
+                    current.SetVisited(false);
                 } else if (line.charAt(i)== 'P'){
+<<<<<<< HEAD
                     Node start = new Node (Node.NodeType.start, i, y);
                     nL.add(start);
                     m.SetStart(start);
@@ -39,9 +43,23 @@ public class MazeParser {
                     Node end = new Node (Node.NodeType.end, i, y);
                     nL.add(end);
                     m.SetEnd(end);
+=======
+                    Node current = new Node (Node.NodeType.start, i, y);
+                    nL.add(current);
+                    m.SetStart(current);
+                    current.SetVisited(false);
+                } else if (line.charAt(i)== '.'){
+                    Node current = new Node (Node.NodeType.end, i, y);
+                    nL.add(current);
+                    m.SetEnd(current);
+                    current.SetVisited(false);
+>>>>>>> Ravneet
                 }
+    
+
             }
             m.PushArrayNode(nL);
+            y++;
         }
         br.close();
 

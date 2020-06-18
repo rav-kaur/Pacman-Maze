@@ -9,7 +9,10 @@ public class Maze
 {	
 
 	ArrayList<ArrayList<Node>> maze = new ArrayList<ArrayList<Node>>();
+<<<<<<< HEAD
 
+=======
+>>>>>>> Ravneet
 	private Node start;
 	private Node end;
 	
@@ -44,6 +47,21 @@ public class Maze
 		return this.end;
 	}
 
+<<<<<<< HEAD
+=======
+	public int getHeight(){
+		return maze.size();
+	}
+
+	public int getWidth(){
+		return maze.get(0).size();
+	}
+
+	public void setPath(Node current){
+		current.SetNode(Node.NodeType.path);
+	}
+
+>>>>>>> Ravneet
 	public ArrayList<Node> getNeighbours(Node currentNode, int x, int y){
 		
 		Node top, bottom, left, right;
@@ -53,18 +71,22 @@ public class Maze
 		if ((y-1) >= 0){
 			top = maze.get(y-1).get(x);
 			neighbours.add(top);
+			top.setParent(currentNode);
 		}
 		if ((y+1) < maze.size()){
 			bottom = maze.get(y+1).get(x);
 			neighbours.add(bottom);
+			bottom.setParent(currentNode);
 		}
 		if ((x-1) >= 0){
 			left = maze.get(y).get(x-1);
 			neighbours.add(left);
+			left.setParent(currentNode);
 		}
 		if ((x+1) < maze.get(0).size()){
 			right = maze.get(y).get(x+1);
 			neighbours.add(right);
+			right.setParent(currentNode);
 		}
 		return neighbours;
 	}
@@ -79,8 +101,10 @@ public class Maze
 			{
 				System.out.print(maze.get(y).get(x).GetNodeTypeName());
 			}
+			
 				
 		}
+		System.out.println("");
 	}
 	
 }
