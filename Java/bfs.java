@@ -22,7 +22,7 @@ public class bfs {
 
         System.out.println("Input File Name: ");
         fileName = sc.nextLine().trim();
-        String filePath = (System.getProperty("user.dir")+"/Java/"+fileName);
+        String filePath = (System.getProperty("user.dir")+"/"+fileName);
         File file = new File(filePath);
 
         MazeParser parser = new MazeParser(file);
