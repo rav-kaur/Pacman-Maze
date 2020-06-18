@@ -29,17 +29,17 @@ public class bfs {
         parser.readFile(m);
 
         sc.close();
-        LinkedList<Node> finalPath = SolveMaze_BFS(m);
+        SolveMaze_BFS(m);
         m.PrintMaze();
 
     }
 
-    public static LinkedList<Node> SolveMaze_BFS(Maze m)
+    public static void SolveMaze_BFS(Maze m)
 	{
         Hashtable <Node, Node> path = new Hashtable <Node, Node>();
         Node start = m.GetStart();
 
-        System.out.println("Start:" + start.getRow() +"," + start.getCol());
+        //System.out.println("Start:" + start.getRow() +"," + start.getCol());
 
         Queue<Node> frontier = new LinkedList<>();
         Set<Node> explored = new HashSet<Node>();
@@ -50,11 +50,11 @@ public class bfs {
 
             if (!current.IsVisited()){
 
-                System.out.println("Node: " + current.GetNodeTypeName() + " ("+current.getRow() + "," +current.getCol()+")");
+                //System.out.println("Node: " + current.GetNodeTypeName() + " ("+current.getRow() + "," +current.getCol()+")");
                 
                 if (current.GetNodeType() == Node.NodeType.end){
                     System.out.println("Explored: " + explored.size());
-                    return rebuildPath(current, path);
+                    rebuildPath(current, path);
                 } else {
                     ArrayList<Node> neighbors = m.getNeighbours(current, current.getCol(), current.getRow());
                     for (Node neighbor : neighbors){
@@ -70,27 +70,25 @@ public class bfs {
             
             
         }
-        return null;
+        
     }
 
-    public static LinkedList<Node> rebuildPath(Node current, Hashtable<Node, Node> path){
+    public static void rebuildPath(Node current, Hashtable<Node, Node> path){
         LinkedList<Node> finalPath = new LinkedList<>();
 
         Node parent = path.get(current);
         finalPath.push(current);
         current.SetNode(Node.NodeType.path);
-        System.out.println(current.GetNodeTypeName());
+        //System.out.println(current.GetNodeTypeName());
 
         while (parent != null && parent.GetNodeType()!= Node.NodeType.start){
             finalPath.push(parent);
-            System.out.println(parent.GetNodeTypeName());
+            //System.out.println(parent.GetNodeTypeName());
             parent.SetNode(Node.NodeType.path);
             parent = path.get(parent);
         }
 
-        System.out.println(finalPath.size());
-
-        return finalPath;
+        System.out.println("Cost: "+ finalPath.size());
 
     }
 
