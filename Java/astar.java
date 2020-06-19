@@ -1,6 +1,5 @@
 import java.util.Scanner;
 import java.util.Set;
-//import java.util.ArrayList;
 import java.io.*;
 import java.util.ArrayList;
 import java.util.Comparator;
@@ -9,7 +8,10 @@ import java.util.Hashtable;
 import java.util.LinkedList;
 import java.util.PriorityQueue;
 
-public class astaragain {
+/**This class contains functions that will parse through a maze and perform an A star search algorithm to find the 
+ * most optimal path from the start node to the end node
+ */
+public class astar {
 
         public static void main(String[] args) throws Exception{
     
@@ -28,13 +30,15 @@ public class astaragain {
             parser.readFile(m);
     
             sc.close();
-    
-            m.PrintMaze();
             aStarSearch(m);
             m.PrintMaze();
         }
 
 
+        /**
+         * This function will perform an A star search on the maze to find a solution from start to end
+         * @param m maze
+         */
         public static void aStarSearch(Maze m){
 
             Node start = m.GetStart();
@@ -42,29 +46,28 @@ public class astaragain {
             ArrayList<Node> neighbours;
             Hashtable <Node, Node> path = new Hashtable <Node, Node>();
 
-            // PriorityQueue<Node> frontier = new PriorityQueue<Node>(0, new NodeComparator());
+            /** Priority queue organized by shortest possible distance (inital path + heuristic) */
             PriorityQueue<Node> frontier = new PriorityQueue<Node>(new Comparator<Node>() {
                 @Override
                 public int compare(Node n1, Node n2) {
                     return  Integer.compare(getHeuristic(n1, end, start), getHeuristic(n2,end, start));
                 }
             });
+            /** Explored keeps track of all nodes that are reached */
             Set<Node> explored = new HashSet<Node>();
 
             frontier.add(start);
             while(!frontier.isEmpty()){
                 Node current  = frontier.poll();
                 explored.add(current);
-                // System.out.println("Node: " + current.GetNodeTypeName() + " ("+current.getRow() + "," +current.getCol()+")");
 
-
+                /** Goal node is found */
                 if(current.GetNodeType()== Node.NodeType.end){
                     System.out.println("Explored Nodes: "+ explored.size());
-                    System.out.println("Yay we made it to the end");
                     rebuildPath(current, path);
                     return;
                 }
-
+                /**Get all neighbours for current node and add them to frontier if they have not already been visited and are a space */
                 neighbours = m.getNeighbours(current, current.getCol(), current.getRow());
                 for(Node neighbour:neighbours){
                     if (!neighbour.IsVisited() && neighbour.GetNodeType()!=Node.NodeType.wall){
@@ -76,34 +79,38 @@ public class astaragain {
                             frontier.remove(neighbour);
                         }
                     }
-            
-                    
+        
                 }   
                 current.SetVisited(true);
 
             }
 
-
-            
         }
 
+        /**
+         * This function takes in current, start and end nodes and returns the shortest path from start to current + current to end
+         * @param current 
+         * @param end 
+         * @param start
+         * @return
+         */
         public static int getHeuristic(Node current, Node end, Node start){
             int startPath = Math.abs(current.getCol()-start.getCol())+Math.abs(current.getRow()-start.getRow());
             int heuristic = Math.abs(current.getCol()-end.getCol())+Math.abs(current.getRow()-end.getRow()); 
             return startPath + heuristic;
         }
+
         
+
         public static void rebuildPath(Node current, Hashtable<Node, Node> path){
             LinkedList<Node> finalPath = new LinkedList<>();
     
             Node parent = path.get(current);
             finalPath.push(current);
             current.SetNode(Node.NodeType.path);
-            //System.out.println(current.GetNodeTypeName());
     
             while (parent != null && parent.GetNodeType()!= Node.NodeType.start){
                 finalPath.push(parent);
-                //System.out.println(parent.GetNodeTypeName());
                 parent.SetNode(Node.NodeType.path);
                 parent = path.get(parent);
             }
