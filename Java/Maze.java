@@ -43,6 +43,8 @@ public class Maze
 		return this.end;
 	}
 
+<<<<<<< HEAD
+=======
 	public int getHeight(){
 		return maze.size();
 	}
@@ -55,6 +57,7 @@ public class Maze
 		current.SetNode(Node.NodeType.path);
 	}
 
+>>>>>>> Ravneet
 	public ArrayList<Node> getNeighbours(Node currentNode, int x, int y){
 		
 		Node top, bottom, left, right;
