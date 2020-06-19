@@ -1,9 +1,11 @@
+import java.util.ArrayList;
+
 /* 
  * Student Name: Ryan Jiffri
  * Student ID: 181741000
  */
 
- //import java.util.ArrayList;
+//import java.util.ArrayList;
 
 public class Node 
 {
@@ -15,7 +17,7 @@ public class Node
 	private int row;
 	private int col;
 	private Node parent;
-	
+
 	public Node(NodeType t, int x, int y)
 	{
 		typeOfNode = t;
@@ -40,15 +42,45 @@ public class Node
 	public int getCol(){
 		return this.col;
 	}
-		
+
 	public void SetNode(NodeType nt) 
 	{
 		typeOfNode = nt;
 	}
-	
+
 	public NodeType GetNodeType()
 	{
 		return typeOfNode;
+	}
+
+	public int StraighLineDistance( Node n1)
+	{
+		int col1 = this.getCol();
+		int col2 = n1.getCol();
+
+		int row1 = this.getRow();
+		int row2 = n1.getRow();
+
+		return (int) Math.sqrt((row2 - row1)^2 + (col2 - col1)^2);
+	}
+
+	public static Node WorstNextOptionGreedy(ArrayList<Node> nodes, Node goal)
+	{
+		if(nodes.size() > 0)
+		{
+			Node worst = nodes.get(0);
+			for (Node n : nodes)
+			{
+				if(n.StraighLineDistance(goal) > goal.StraighLineDistance(worst)) 
+				{
+					worst = n;
+				}
+			}
+			
+			return worst;
+		}
+		
+		return null;
 	}
 
 
@@ -56,12 +88,12 @@ public class Node
 		int row = this.getRow();
 		int col = this.getCol();
 
-        if (row < 0 || row >= m.getHeight() || col < 0 || col >= m.getWidth()) {
-            return false;
-        }
-        return true;
-    }
-	
+		if (row < 0 || row >= m.getHeight() || col < 0 || col >= m.getWidth()) {
+			return false;
+		}
+		return true;
+	}
+
 	public String GetNodeTypeName()
 	{
 		if(typeOfNode == NodeType.space)
@@ -84,11 +116,11 @@ public class Node
 		if (typeOfNode == NodeType.path){
 			return ".";
 		}
-		
+
 		return "ERROR";
-		
+
 	}
-	
+
 	public boolean IsVisited() 
 	{
 		return visited;
@@ -103,9 +135,9 @@ public class Node
 	{
 		visited = b;
 	}
-	
-	
-	
-	
-	
+
+
+
+
+
 }
