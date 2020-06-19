@@ -39,8 +39,6 @@ public class bfs {
         Hashtable <Node, Node> path = new Hashtable <Node, Node>();
         Node start = m.GetStart();
 
-        //System.out.println("Start:" + start.getRow() +"," + start.getCol());
-
         Queue<Node> frontier = new LinkedList<>();
         Set<Node> explored = new HashSet<Node>();
 
@@ -49,12 +47,11 @@ public class bfs {
             Node current = frontier.remove();
 
             if (!current.IsVisited()){
-
-                //System.out.println("Node: " + current.GetNodeTypeName() + " ("+current.getRow() + "," +current.getCol()+")");
                 
                 if (current.GetNodeType() == Node.NodeType.end){
                     System.out.println("Explored: " + explored.size());
                     rebuildPath(current, path);
+                    
                 } else {
                     ArrayList<Node> neighbors = m.getNeighbours(current, current.getCol(), current.getRow());
                     for (Node neighbor : neighbors){
@@ -79,11 +76,9 @@ public class bfs {
         Node parent = path.get(current);
         finalPath.push(current);
         current.SetNode(Node.NodeType.path);
-        //System.out.println(current.GetNodeTypeName());
 
         while (parent != null && parent.GetNodeType()!= Node.NodeType.start){
             finalPath.push(parent);
-            //System.out.println(parent.GetNodeTypeName());
             parent.SetNode(Node.NodeType.path);
             parent = path.get(parent);
         }
