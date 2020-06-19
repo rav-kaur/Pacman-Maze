@@ -6,10 +6,31 @@
     "configurations": [
         {
             "type": "java",
-            "name": "CodeLens (Launch) - greedy",
+            "name": "CodeLens (Launch) - astaragain",
             "request": "launch",
-            "mainClass": "greedy",
-            "projectName": "PacmanMaze_622bb5d8"
+            "mainClass": "astaragain",
+            "projectName": "PacmanMaze_999a69bc"
+        },
+        {
+            "type": "java",
+            "name": "CodeLens (Launch) - test",
+            "request": "launch",
+            "mainClass": "test",
+            "projectName": "PacmanMaze_999a69bc"
+        },
+        {
+            "type": "java",
+            "name": "CodeLens (Launch) - astar",
+            "request": "launch",
+            "mainClass": "astar",
+            "projectName": "PacmanMaze_999a69bc"
+        },
+        {
+            "type": "java",
+            "name": "CodeLens (Launch) - bfs",
+            "request": "launch",
+            "mainClass": "bfs",
+            "projectName": "PacmanMaze_999a69bc"
         },
         {
             "type": "java",
