@@ -1,11 +1,5 @@
 import java.util.ArrayList;
 
-/* 
- * Student Name: Ryan Jiffri
- * Student ID: 181741000
- */
-
-//import java.util.ArrayList;
 
 public class Node 
 {
@@ -55,32 +49,13 @@ public class Node
 
 	public int StraighLineDistance( Node n1)
 	{
-		int col1 = this.getCol();
-		int col2 = n1.getCol();
+		int col2 = this.getCol();
+		int col1 = n1.getCol();
 
-		int row1 = this.getRow();
-		int row2 = n1.getRow();
+		int row2 = this.getRow();
+		int row1 = n1.getRow();
 
-		return (int) Math.sqrt((row2 - row1)^2 + (col2 - col1)^2);
-	}
-
-	public static Node WorstNextOptionGreedy(ArrayList<Node> nodes, Node goal)
-	{
-		if(nodes.size() > 0)
-		{
-			Node worst = nodes.get(0);
-			for (Node n : nodes)
-			{
-				if(n.StraighLineDistance(goal) > goal.StraighLineDistance(worst)) 
-				{
-					worst = n;
-				}
-			}
-			
-			return worst;
-		}
-		
-		return null;
+		return (int)  -Math.sqrt((row2 - row1)^2 + (col2 - col1)^2);
 	}
 
 
