@@ -61,7 +61,7 @@ public class Node
 		int row1 = this.getRow();
 		int row2 = n1.getRow();
 
-		return (int) Math.sqrt((row2 - row1)^2 + (col2 - col1)^2);
+		return (int) (Math.abs(row2 - row1) + Math.abs(col2 - col1));
 	}
 
 	public static Node WorstNextOptionGreedy(ArrayList<Node> nodes, Node goal)

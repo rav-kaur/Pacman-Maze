@@ -34,38 +34,33 @@ public class dfs {
     public static void SolveMaze_DFS(Maze m)
 	{
         Hashtable <Node, Node> path = new Hashtable <Node, Node>();
-        Node start = m.GetStart();
-
-        Stack<Node> nodeStack = new Stack<>();
+        Stack<Node> frontier = new Stack<Node>();
         Set<Node> explored = new HashSet<Node>();
-
-        nodeStack.add(start);
-        while(!nodeStack.isEmpty()) {
-            Node current = nodeStack.pop();
-
-            if (!current.IsVisited()){
-                
-                if (current.GetNodeType() == Node.NodeType.end){
-                    System.out.println("Explored: " + explored.size());
-                    rebuildPath(current, path);
-                } else {
-                    explored.add(current);
-                    ArrayList<Node> neighbors = m.getNeighbours(current, current.getCol(), current.getRow());
-                    for (Node neighbor : neighbors){
-                        if (!explored.contains(neighbor) && neighbor.GetNodeType() != Node.NodeType.wall){
-                            nodeStack.add(neighbor);
-                            path.put(neighbor, current);
-                        }
-                    }
-                    current.SetVisited(true);
-                    
-                    
-                } 
-            }
-            
-            
-        }
+        Node start = m.GetStart();
+        frontier.push(start);
         
+        while(!frontier.isEmpty()){
+            Node current = frontier.pop();
+            //System.out.println("Node: " + current.GetNodeTypeName() + " (" + current.getRow() +","+ current.getCol()+")");
+            
+
+            if (current.GetNodeType() == Node.NodeType.end){
+                System.out.println("REACHED THE END");
+                System.out.println("Explored: " + explored.size());
+                rebuildPath(current, path);
+                return;
+            }
+
+            ArrayList<Node> neighbors = m.getNeighbours(current, current.getCol(), current.getRow());
+            for (Node neighbor : neighbors){
+                if (!frontier.contains(neighbor) && !explored.contains(neighbor)&& neighbor.GetNodeType() != Node.NodeType.wall){
+                    frontier.push(neighbor);
+                    path.put(neighbor, current);
+                }
+            }
+            explored.add(current);
+            current.SetVisited(true);
+        }
     }
 
     public static void rebuildPath(Node current, Hashtable<Node, Node> path){
@@ -82,6 +77,7 @@ public class dfs {
         }
 
         System.out.println("Cost: "+ finalPath.size());
+        return;
 
     }
 
