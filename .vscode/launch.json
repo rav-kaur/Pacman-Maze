@@ -6,6 +6,20 @@
     "configurations": [
         {
             "type": "java",
+            "name": "CodeLens (Launch) - test",
+            "request": "launch",
+            "mainClass": "test",
+            "projectName": "PacmanMaze_999a69bc"
+        },
+        {
+            "type": "java",
+            "name": "CodeLens (Launch) - astar",
+            "request": "launch",
+            "mainClass": "astar",
+            "projectName": "PacmanMaze_999a69bc"
+        },
+        {
+            "type": "java",
             "name": "CodeLens (Launch) - bfs",
             "request": "launch",
             "mainClass": "bfs",
