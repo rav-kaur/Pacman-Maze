@@ -101,7 +101,11 @@ public class astar {
         }
 
         
-
+        /**
+         * This function back tracks and rebuilds the path from the end node to the start node
+         * @param current - the end of the maze
+         * @param path - keeps track of the path that solveMaze_BFS follows (node, parent)
+         */
         public static void rebuildPath(Node current, Hashtable<Node, Node> path){
             LinkedList<Node> finalPath = new LinkedList<>();
     
