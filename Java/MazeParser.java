@@ -35,15 +35,6 @@ public class MazeParser {
                     nL.add(current);
                     current.SetVisited(false);
                 } else if (line.charAt(i)== 'P'){
-<<<<<<< HEAD
-                    Node start = new Node (Node.NodeType.start, i, y);
-                    nL.add(start);
-                    m.SetStart(start);
-                } else if (line.charAt(i)== '.'){
-                    Node end = new Node (Node.NodeType.end, i, y);
-                    nL.add(end);
-                    m.SetEnd(end);
-=======
                     Node current = new Node (Node.NodeType.start, i, y);
                     nL.add(current);
                     m.SetStart(current);
@@ -53,7 +44,6 @@ public class MazeParser {
                     nL.add(current);
                     m.SetEnd(current);
                     current.SetVisited(false);
->>>>>>> Ravneet
                 }
     
 
