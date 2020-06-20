@@ -1,18 +1,7 @@
-import java.util.Scanner;
-import java.util.Set;
 import java.io.*;
-import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.LinkedList;
-import java.util.Queue;
-
 import java.util.*;
 
-
-
 public class greedy {
-
-    
 
     public static void main(String[]args) throws Exception {
         Maze m = new Maze();
@@ -40,52 +29,48 @@ public class greedy {
         Node start = m.GetStart();
         Node endNode = m.GetEnd();
 
-        Queue<Node> frontier = new LinkedList<>();
-        Set<Node> explored = new HashSet<Node>();
+        int countExplored = 0;
+        
+        PriorityQueue<Map.Entry<Node, Integer>> frontier = new PriorityQueue<>((a, b)->b.getValue()-a.getValue());
 
-        frontier.add(start);
+        frontier.offer(new AbstractMap.SimpleEntry<>(start, 0));
+        
         while(!frontier.isEmpty()) {
-            Node current = frontier.remove();
-
+        	
+            Node current = frontier.poll().getKey();
+            
             if (!current.IsVisited()){
                 
                 if (current.GetNodeType() == Node.NodeType.end){
-                    System.out.println("Explored: " + explored.size());
+                    System.out.println("Explored: " + countExplored);
                     rebuildPath(current, path);
+                    return;
                 } else {
                     ArrayList<Node> neighbors = m.getNeighbours(current, current.getCol(), current.getRow());
                     
-                    ArrayList<Node> explorable = new ArrayList<Node>();
                     
-                    
-                    //Get possible moves
                     for (Node neighbor : neighbors){
                        
-                    	if (!explored.contains(neighbor) && !neighbor.IsVisited() && neighbor.GetNodeType() != Node.NodeType.wall)
+                    	if (!neighbor.IsVisited() && neighbor.GetNodeType() != Node.NodeType.wall)
                     	{
-                        	explorable.add(neighbor);	
+                        	frontier.offer(new AbstractMap.SimpleEntry<>(neighbor, neighbor.StraighLineDistance(endNode)));
+                            path.put(neighbor, current);
                         }
                     }
                     
-                    //push them to frontier in order Worst->best
-                    while(explorable.size() > 0)
-                    {
-                    	Node currentExplorable = Node.WorstNextOptionGreedy(explorable, endNode);
-                    	explorable.remove(currentExplorable);
-                    	frontier.add(currentExplorable);
-                        path.put(currentExplorable, current);
-                    }
-                    
                     current.SetVisited(true);
-                    explored.add(current);
+                    countExplored++;
                 } 
             }
-            
-            
         }
         
     }
 
+    /**
+     * This function back tracks and rebuilds the path from the end node to the start node
+     * @param current - the end of the maze
+     * @param path - keeps track of the path that solveMaze_BFS follows (node, parent)
+     */
     public static void rebuildPath(Node current, Hashtable<Node, Node> path){
         LinkedList<Node> finalPath = new LinkedList<>();
 
@@ -102,5 +87,6 @@ public class greedy {
         System.out.println("Cost: "+ finalPath.size());
 
     }
+    
 
 }
