@@ -88,6 +88,17 @@ public class Node
 		return "ERROR";
 		
 	}
+
+	public int StraighLineDistance( Node n1)
+	{
+		int col2 = this.getCol();
+		int col1 = n1.getCol();
+
+		int row2 = this.getRow();
+		int row1 = n1.getRow();
+
+		return (int)  -Math.sqrt((row2 - row1)^2 + (col2 - col1)^2);
+	}
 	
 	public boolean IsVisited() 
 	{
